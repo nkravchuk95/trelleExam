@@ -1,4 +1,6 @@
 package com.trello.api.models;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TrelloList {
 
@@ -7,6 +9,6 @@ public class TrelloList {
     public Boolean closed;
 
     public String IdBoard;
-    //public List<Card> cards;
+    public List<Card> cards ;
 
 }

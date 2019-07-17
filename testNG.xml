@@ -5,4 +5,24 @@
             <class name="regression.LoginTest"></class>
         </classes>
     </test>
+    <test name="CreateCard">
+        <classes>
+            <class name="regression.CreateCard"></class>
+        </classes>
+    </test>
+    <test name="MoveCard">
+        <classes>
+            <class name="regression.CardAction"></class>
+        </classes>
+    </test>
+    <test name="DeletCard">
+        <classes>
+            <class name="regression.DeleteCard"></class>
+        </classes>
+    </test>
+    <test name="Logout">
+        <classes>
+            <class name="regression.LogoutTest"></class>
+        </classes>
+    </test>
 </suite>

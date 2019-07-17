@@ -1,17 +1,12 @@
 package com.trello.ui.pages;
 
-import com.trello.api.models.Card;
 import com.trello.ui.core.BrowserFactory;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.Iterator;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 public class CardPage extends BrowserFactory {
 
@@ -28,7 +23,6 @@ public class CardPage extends BrowserFactory {
     private By checklistBtnLink = By.cssSelector("a[class='button-link js-add-checklist-menu']");
         private By checklistNameField = By.cssSelector("[class='js-checklist-title js-autofocus']");
         private By checklistAddBtn = By.cssSelector("[class='primary wide confirm js-add-checklist']");
-       // private By checklistItemAddBtn = By.cssSelector("[class='editable non-empty checklist-title']>h3");
 
     private By checklists = By.cssSelector("div[class='checklist']");
         private By checklistItemAddLink = By.cssSelector("button[class='js-new-checklist-item-button button subtle hide-on-edit']");
@@ -56,6 +50,10 @@ public class CardPage extends BrowserFactory {
     private By listsSelect = By.cssSelector("[class = 'js-select-list']");
     private By cardsSelect = By.cssSelector("[class = 'js-select-board']");
     private By moveSubmitBtn = By.cssSelector("[class = 'primary wide js-submit']");
+
+    private By delCardLink = By.cssSelector("a[class='button-link js-archive-card']");
+        private By delCardBtn = By.cssSelector("[class = 'button-link js-delete-card negate']");
+        private By delCardConfirm = By.cssSelector("[class = 'js-confirm full negate']");
 
     private By closeCardLink = By.cssSelector("a[class='icon-lg icon-close dialog-close-button js-close-window']");
 
@@ -120,15 +118,11 @@ public class CardPage extends BrowserFactory {
         driver().findElement(checklistNameField).sendKeys(checklistName);
         driver().findElement(checklistAddBtn).click();
         new WebDriverWait(driver(), 20).until(ExpectedConditions.elementToBeClickable(driver().findElements(checklistItemAddBtn).get(checklistsSize)));
-        //driver().findElements(checklistItemAddLink).get(checklistsSize).click();
         driver().findElements(checklistItemTextArea).get(checklistsSize).clear();
         driver().findElements(checklistItemTextArea).get(checklistsSize).sendKeys(checklistItemName);
         driver().findElements(checklistItemAddBtn).get(checklistsSize).click();
     }
 
-    public void addItemChecklist( String cardUrl, String checklistID){
-
-    }
 
     public void addDateTime(String cardUrl, String date){
 
@@ -162,7 +156,12 @@ public class CardPage extends BrowserFactory {
     }
 
 
+    public void deleteCard(String cardUrl) {
 
-
-
+        get(cardUrl);
+        driver().findElement(delCardLink).click();
+        new WebDriverWait(driver(), 20).until(ExpectedConditions.elementToBeClickable(delCardBtn));
+        driver().findElement(delCardBtn).click();
+        driver().findElement(delCardConfirm).click();
+    }
 }
